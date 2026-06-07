@@ -53,6 +53,23 @@ html, body{ width:100%;
    
 }
 
+    #forecast{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:10px;
+}
+
+.forecastDay{
+    background:#f3f7fb;
+    border-radius:10px;
+    padding:8px;
+    text-align:center;
+    min-width:70px;
+    font-size:13px;
+}
+
 </style>
 
 </head>
@@ -77,7 +94,8 @@ html, body{ width:100%;
 
   <p>🌇 <b>Δύση:</b> <span id="sunset"></span></p>
 
-
+<h3>Πρόγνωση 5 ημερών</h3>
+<div id="forecast"></div>
     
 </div>
 
@@ -155,6 +173,63 @@ document.getElementById("city").innerHTML =
 console.error(error);
 
 });
+
+fetch(
+`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=el&appid=${apiKey}`
+)
+.then(response => response.json())
+.then(data => {
+
+const forecastDiv =
+document.getElementById("forecast");
+
+forecastDiv.innerHTML = "";
+
+const daily = data.list.filter(item =>
+item.dt_txt.includes("12:00:00")
+);
+
+daily.slice(0,5).forEach(day => {
+
+const date = new Date(day.dt * 1000);
+
+const dayName =
+date.toLocaleDateString("el-GR", {
+weekday:"short"
+});
+
+const temp =
+Math.round(day.main.temp);
+
+const iconCode =
+day.weather[0].icon;
+
+let icon = "☀️";
+
+if(iconCode.startsWith("02")) icon = "🌤️";
+if(iconCode.startsWith("03")) icon = "☁️";
+if(iconCode.startsWith("04")) icon = "☁️";
+if(iconCode.startsWith("09")) icon = "🌧️";
+if(iconCode.startsWith("10")) icon = "🌦️";
+if(iconCode.startsWith("11")) icon = "⛈️";
+if(iconCode.startsWith("13")) icon = "❄️";
+if(iconCode.startsWith("50")) icon = "🌫️";
+
+forecastDiv.innerHTML += `
+<div class="forecastDay">
+<div><b>${dayName}</b></div>
+<div style="font-size:28px">${icon}</div>
+<div>${temp}°C</div>
+</div>
+`;
+
+});
+
+})
+.catch(error => {
+console.error(error);
+});
+
 
 </script>
 
