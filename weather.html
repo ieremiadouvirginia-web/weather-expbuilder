@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<title>Καιρικές Συνθήκες</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+}
+
+.card{
+    border:1px solid #ccc;
+    border-radius:10px;
+    padding:20px;
+}
+
+.temp{
+    font-size:32px;
+    font-weight:bold;
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+    <h2 id="city">Φόρτωση...</h2>
+
+    <div class="temp" id="temp"></div>
+
+    <p id="desc"></p>
+
+    <p><b>Υγρασία:</b> <span id="humidity"></span>%</p>
+
+    <p><b>Άνεμος:</b> <span id="wind"></span> m/s</p>
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const lat = params.get("lat");
+const lon = params.get("lon");
+
+const apiKey = "58b5a645e637795a1030d403fb199df0";
+
+fetch(
+`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=el&appid=${apiKey}`
+)
+.then(response => response.json())
+.then(data => {
+
+document.getElementById("city").innerHTML =
+data.name;
+
+document.getElementById("temp").innerHTML =
+data.main.temp + " °C";
+
+document.getElementById("desc").innerHTML =
+data.weather[0].description;
+
+document.getElementById("humidity").innerHTML =
+data.main.humidity;
+
+document.getElementById("wind").innerHTML =
+data.wind.speed;
+
+})
+.catch(error => {
+
+document.getElementById("city").innerHTML =
+"Σφάλμα φόρτωσης";
+
+console.error(error);
+
+});
+
+</script>
+
+</body>
+</html>
