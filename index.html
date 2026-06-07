@@ -28,6 +28,12 @@ html, body{ width:100%;
     font-size:32px;
     font-weight:bold;
 }
+
+#weatherIcon{
+    display:block;
+    margin:auto;
+}
+
 </style>
 
 </head>
@@ -64,6 +70,11 @@ fetch(
 
 document.getElementById("city").innerHTML =
 data.name;
+
+const iconCode = data.weather[0].icon;
+
+document.getElementById("weatherIcon").src =
+`https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
 document.getElementById("temp").innerHTML =
 data.main.temp + " °C";
