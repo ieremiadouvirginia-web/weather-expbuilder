@@ -132,7 +132,6 @@ document.getElementById("city").innerHTML =
 data.name;
 
 const iconCode = data.weather[0].icon;
-console.log(data.weather[0].icon);
 
 let icon = "☀️";
 
@@ -175,6 +174,7 @@ cardColor =
 if(iconCode.startsWith("13"))
 cardColor =
 "linear-gradient(to bottom,#f7fbff,#dfefff)";
+ 
 
 if(iconCode.startsWith("50"))
 cardColor =
