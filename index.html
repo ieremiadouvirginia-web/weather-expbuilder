@@ -75,6 +75,7 @@ document.getElementById("city").innerHTML =
 data.name;
 
 const iconCode = data.weather[0].icon;
+console.log(data.weather[0].icon);
 
 document.getElementById("weatherIcon").src =
 `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
