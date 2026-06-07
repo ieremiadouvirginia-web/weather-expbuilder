@@ -17,7 +17,7 @@ html, body{ width:100%;
     
 
 .card{
-    background:white;
+    background:linear-gradient(to bottom,#ffffff,#f3f7fb);
     border-radius:20px;
     padding:18px;
     box-sizing:border-box;
@@ -136,6 +136,9 @@ console.log(data.weather[0].icon);
 
 let icon = "☀️";
 
+let cardColor =
+"linear-gradient(to bottom,#ffffff,#f3f7fb)";
+
 if(iconCode === "01d" || iconCode === "01n") icon = "☀️";
 if(iconCode === "02d" || iconCode === "02n") icon = "🌤️";
 if(iconCode === "03d" || iconCode === "03n") icon = "☁️";
@@ -146,7 +149,41 @@ if(iconCode === "11d" || iconCode === "11n") icon = "⛈️";
 if(iconCode === "13d" || iconCode === "13n") icon = "❄️";
 if(iconCode === "50d" || iconCode === "50n") icon = "🌫️";
 
+
+if(iconCode.startsWith("01"))
+cardColor =
+"linear-gradient(to bottom,#fff6b7,#ffd86f)";
+
+if(iconCode.startsWith("02"))
+cardColor =
+"linear-gradient(to bottom,#fff4d6,#ffe8a3)";
+
+if(iconCode.startsWith("03") ||
+   iconCode.startsWith("04"))
+cardColor =
+"linear-gradient(to bottom,#eef2f5,#d5dde5)";
+
+if(iconCode.startsWith("09") ||
+   iconCode.startsWith("10"))
+cardColor =
+"linear-gradient(to bottom,#cfe8ff,#8fc2ff)";
+
+if(iconCode.startsWith("11"))
+cardColor =
+"linear-gradient(to bottom,#5b6470,#2d3440)";
+
+if(iconCode.startsWith("13"))
+cardColor =
+"linear-gradient(to bottom,#f7fbff,#dfefff)";
+
+if(iconCode.startsWith("50"))
+cardColor =
+"linear-gradient(to bottom,#f0f0f0,#d9d9d9)";
+
 document.getElementById("weatherIcon").innerHTML = icon;
+
+document.querySelector(".card").style.background =
+cardColor;
 
 document.getElementById("temp").innerHTML =
 data.main.temp + " °C";
