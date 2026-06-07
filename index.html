@@ -72,6 +72,13 @@ html, body{ width:100%;
   <p>💧 <b>Υγρασία:</b> <span id="humidity"></span>%</p>
 
   <p>🌬️ <b>Άνεμος:</b> <span id="wind"></span> m/s</p>
+    
+  <p>🌅 <b>Ανατολή:</b> <span id="sunrise"></span></p>
+
+  <p>🌇 <b>Δύση:</b> <span id="sunset"></span></p>
+
+
+    
 </div>
 
 <script>
@@ -123,6 +130,21 @@ data.main.humidity;
 
 document.getElementById("wind").innerHTML =
 data.wind.speed;
+
+const sunrise = new Date(data.sys.sunrise * 1000);
+const sunset = new Date(data.sys.sunset * 1000);
+
+document.getElementById("sunrise").innerHTML =
+sunrise.toLocaleTimeString("el-GR", {
+    hour: "2-digit",
+    minute: "2-digit"
+});
+
+document.getElementById("sunset").innerHTML =
+sunset.toLocaleTimeString("el-GR", {
+    hour: "2-digit",
+    minute: "2-digit"
+});
 
 })
 .catch(error => {
