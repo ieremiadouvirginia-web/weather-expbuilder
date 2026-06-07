@@ -67,9 +67,11 @@ html, body{ width:100%;
 
     <p id="desc"></p>
 
-    <p><b>Υγρασία:</b> <span id="humidity"></span>%</p>
+  <p>🥵 <b>Αίσθηση:</b> <span id="feelsLike"></span> °C</p>
 
-    <p><b>Άνεμος:</b> <span id="wind"></span> m/s</p>
+  <p>💧 <b>Υγρασία:</b> <span id="humidity"></span>%</p>
+
+  <p>🌬️ <b>Άνεμος:</b> <span id="wind"></span> m/s</p>
 </div>
 
 <script>
@@ -112,6 +114,9 @@ data.main.temp + " °C";
 
 document.getElementById("desc").innerHTML =
 data.weather[0].description;
+
+document.getElementById("feelsLike").innerHTML =
+data.main.feels_like.toFixed(1);
 
 document.getElementById("humidity").innerHTML =
 data.main.humidity;
